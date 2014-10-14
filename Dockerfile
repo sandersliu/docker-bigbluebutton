@@ -12,29 +12,15 @@ RUN update-locale LANG=en_US.UTF-8
 RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ trusty multiverse" >> /etc/apt/sources.list \
     && wget http://ubuntu.bigbluebutton.org/bigbluebutton.asc -O- | sudo apt-key add - \
     && echo "deb http://ubuntu.bigbluebutton.org/trusty-090/ bigbluebutton-trusty main" >> /etc/apt/sources.list
-RUN apt-get update && apt-get install -y -q build-essential \
-                              git-core \
-                              checkinstall \
-                              yasm \
-                              texi2html \
-                              libvorbis-dev \
-                              libx11-dev \
-                              libvpx-dev \
-                              libxfixes-dev \
-                              zlib1g-dev \
-                              pkg-config \
-                              netcat \
-                    && apt-get clean \
-                    && rm -rf /tmp/* /var/tmp/*  \
-                    && rm -rf /var/lib/apt/lists/*
-
 #install ffmpeg
 copy ffmpeg.sh /tmp/ffmpeg.sh
 RUN chmod +x /tmp/ffmpeg.sh \
     && /bin/bash -c /tmp/ffmpeg.sh \
     && rm /tmp/ffmpeg.sh
-    
-#General variable definition....
+RUN apt-get update && apt-get install -y -q bigbluebutton \
+                    && apt-get clean \
+                    && rm -rf /tmp/* /var/tmp/*  \
+                    && rm -rf /var/lib/apt/lists/*
 
 ##startup scripts  
 #Pre-config scrip that maybe need to be run one time only when the container run the first time .. using a flag to don't 
@@ -66,7 +52,7 @@ VOLUME /var/backups
 
 # to allow access from outside of the container  to the container service
 # at that ports need to allow access from firewall if need to access it outside of the server. 
-EXPOSE #ports
+EXPOSE 5066 8080
 
 #creatian of volume 
 #VOLUME 
