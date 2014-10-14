@@ -28,6 +28,12 @@ RUN apt-get update && apt-get install -y -q build-essential \
                     && rm -rf /tmp/* /var/tmp/*  \
                     && rm -rf /var/lib/apt/lists/*
 
+#install ffmpeg
+copy ffmpeg.sh /tmp/ffmpeg.sh
+RUN chmod +x /tmp/ffmpeg.sh \
+    && /bin/bash -c /tmp/ffmpeg.sh \
+    && rm /tmp/ffmpeg.sh
+    
 #General variable definition....
 
 ##startup scripts  
