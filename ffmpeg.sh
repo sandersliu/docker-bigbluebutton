@@ -26,8 +26,8 @@ FFMPEG_VERSION=2.3.3
  make
  checkinstall --pkgname=ffmpeg --pkgversion="5:${FFMPEG_VERSION}" --backup=no --deldoc=yes --default
 
- chmod +x install-ffmpeg.sh
- ./install-ffmpeg.sh
+# chmod +x install-ffmpeg.sh
+# ./install-ffmpeg.sh
  
  ffmpeg -version
  
