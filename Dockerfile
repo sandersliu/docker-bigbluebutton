@@ -15,7 +15,7 @@ RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ trusty multiverse" >> /etc/ap
 #install ffmpeg
 copy ffmpeg.sh /tmp/ffmpeg.sh
 RUN chmod +x /tmp/ffmpeg.sh \
-    && /bin/bash -c /tmp/ffmpeg.sh \
+    && /bin/bash -c /tmp/ffmpeg.sh
 RUN apt-get update && apt-get install -y -q bigbluebutton \
                     && apt-get clean \
                     && rm -rf /tmp/* /var/tmp/*  \
