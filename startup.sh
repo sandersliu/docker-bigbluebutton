@@ -4,7 +4,7 @@
 set -e
 
 if [ -f /etc/configured ]; then
-        /sbin/ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}' | bbb-conf --setip 
+        bbb-conf --setip $(/sbin/ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
         bbb-conf --clean
         bbb-conf --check
         echo 'already configured'
