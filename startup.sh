@@ -5,6 +5,7 @@ set -e
 
 if [ -f /etc/configured ]; then
         bbb-conf --clean
+        bbb-conf --check
         echo 'already configured'
 else
         #code that need to run only one time ....
