@@ -6,7 +6,7 @@
 #database for the container ...
 
 apt-get update
-apt-get install -y -q -f --force-yes bigbluebutton 
+DEBIAN_FRONTEND=noninteractive apt-get install -y -q -f --force-yes bigbluebutton 
 
 
 
