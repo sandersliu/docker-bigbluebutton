@@ -8,7 +8,7 @@ ENV HOME /root
 
 #add repository and update the container
 #Installation of nesesary package/software for this containers...
-RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ trusty multiverse" >> /etc/apt/sources.list \
+RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ trusty main restricted universe multiverse" >> /etc/apt/sources.list \
     && wget http://ubuntu.bigbluebutton.org/bigbluebutton.asc -O- | sudo apt-key add - \
     && echo "deb http://ubuntu.bigbluebutton.org/trusty-090/ bigbluebutton-trusty main" >> /etc/apt/sources.list
 
