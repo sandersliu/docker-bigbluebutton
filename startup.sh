@@ -4,7 +4,7 @@
 set -e
 
 if [ -f /etc/configured ]; then
-        
+        #to make sure it works ..
         bbb-conf --clean
         bbb-conf --check
         echo 'already configured'
