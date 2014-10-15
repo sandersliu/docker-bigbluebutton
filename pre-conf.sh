@@ -6,7 +6,7 @@
 #database for the container ...
 
 apt-get update
-DEBIAN_FRONTEND=noninteractive apt-get install -y -qq -f --force-yes bigbluebutton 
+DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --force-yes bigbluebutton 
 
 #apt-get clean 
 #rm -rf /tmp/* /var/tmp/*  
