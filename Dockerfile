@@ -24,6 +24,13 @@ RUN apt-get install -y -q language-pack-en \
 copy ffmpeg.sh /tmp/ffmpeg.sh
 RUN chmod +x /tmp/ffmpeg.sh \
     && /bin/bash -c /tmp/ffmpeg.sh
+    
+RUN apt-get update && apt-get install -y -q --force-yes openjdk-7-jdk \
+                                tomcat7 \
+                    && apt-get clean \
+                    && rm -rf /tmp/* /var/tmp/*  \
+                    && rm -rf /var/lib/apt/lists/*
+
 RUN apt-get update && apt-get install -y -q --force-yes bigbluebutton \
                     && apt-get clean \
                     && rm -rf /tmp/* /var/tmp/*  \
