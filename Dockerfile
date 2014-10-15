@@ -40,6 +40,10 @@ RUN chmod +x /etc/my_init.d/startup.sh
 
 
 ##Adding Deamons to containers
+# to add tomcat7 deamon to runit
+RUN mkdir /etc/service/tomcat7
+COPY tomcat7.sh /etc/service/tomcat7/run
+RUN chmod +x /etc/service/tomcat7/run
 
 #pre-config scritp for different service that need to be run when container image is create 
 #maybe include additional software that need to be installed ... with some service running ... like example mysqld
