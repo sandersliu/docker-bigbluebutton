@@ -5,13 +5,21 @@ MAINTAINER Angel Rodriguez  "angel@quantumobject.com"
 
 # Set correct environment variables.
 ENV HOME /root
-RUN update-locale LANG=en_US.UTF-8
 
 #add repository and update the container
 #Installation of nesesary package/software for this containers...
 RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ trusty multiverse" >> /etc/apt/sources.list \
     && wget http://ubuntu.bigbluebutton.org/bigbluebutton.asc -O- | sudo apt-key add - \
     && echo "deb http://ubuntu.bigbluebutton.org/trusty-090/ bigbluebutton-trusty main" >> /etc/apt/sources.list
+
+#normally I don't like it but for this one maybe I needed it ...    
+RUN apt-get -y update && apt-get -y dist-upgrade
+
+#required 
+RUN apt-get install -y -q language-pack-en \
+    &&update-locale LANG=en_US.UTF-8 \
+    && dpkg-reconfigure locales
+
 #install ffmpeg
 copy ffmpeg.sh /tmp/ffmpeg.sh
 RUN chmod +x /tmp/ffmpeg.sh \
@@ -52,7 +60,7 @@ RUN bbb-conf --enablewebrtc
 
 # to allow access from outside of the container  to the container service
 # at that ports need to allow access from firewall if need to access it outside of the server. 
-EXPOSE 5066 8080
+EXPOSE 80 9123 1935
 
 #creatian of volume 
 #VOLUME 
