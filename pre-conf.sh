@@ -8,6 +8,7 @@
 apt-get update
 DEBIAN_FRONTEND=noninteractive apt-get install -y -qq -f --force-yes bigbluebutton 
 
+rm -f /etc/nginx/sites-enabled/default
 apt-get clean 
 #rm -rf /tmp/* /var/tmp/*  
 #rm -rf /var/lib/apt/lists/*
