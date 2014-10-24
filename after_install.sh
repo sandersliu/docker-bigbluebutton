@@ -6,12 +6,14 @@
 ctner_intn_ip=$(/sbin/ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
 ctner_extn_ip=$(curl -s icanhazip.com)
 
-bbb-conf --setip $ctner_ip
+bbb-conf --setip $ctner_intn_ip
 
 #need to find external ip address of server 
 #Need to fix 
 #/etc/bigbluebutton/nginx/sip.nginx
 # proxy_pass http://172.17.0.193:5066;   # replace line... external maybe
+
+
 
 #need to edit and fix  /opt/freeswitch/conf/vars.xml
 #<X-PRE-PROCESS cmd="set" data="local_ip_v4=xxx.yyy.zzz.qqq"/>  #remove it
