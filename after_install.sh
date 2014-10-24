@@ -1,10 +1,5 @@
 #!/bin/bash
 
-#to finish install that fail when container image was created 
-#container build image try to create the configuration but it is the wrong enviroment ... 
-# but after it is create or run the first time is the best for it to finish it
-dpkg --configure -a
-
 #take the container real ip to configured the web application 
 # in some areas fail because it keep ip info where the container was build that is not the same 
 #where it will run.... need to find all the wrong conf file and fix it in this area ...
@@ -63,18 +58,6 @@ String BigBlueButtonURL = "http://199.59.90.34:49166/bigbluebutton/";  external 
 #####################
 /etc/nginx/sites-available/bigbluebutton   internal port ....
 #####################
-Open the firewall (if you have on installed) and Security Groups (if your using EC2) the following ports:
-
-TCP - 5066
-
-UDP - 16384 to 32768
-###################################
-
-
-#to find any error relate to the container configuration for future fix
-bbb-conf --check  >>/var/log/bbb-conf.log 2>&1
-
-#start it with all the service ... maybe is no the right place to do it but at runit script ..
-bbb-conf --start
-
-
+#Open the firewall (if you have on installed) and Security Groups (if your using EC2) the following ports:
+#TCP - 5066
+#UDP - 16384 to 32768
