@@ -8,13 +8,15 @@ dpkg --configure -a
 #take the container real ip to configured the web application 
 # in some areas fail because it keep ip info where the container was build that is not the same 
 #where it will run.... need to find all the wrong conf file and fix it in this area ...
-ctner_ip=$(/sbin/ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
+ctner_intn_ip=$(/sbin/ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
+ctner_extn_ip=$(curl -s icanhazip.com)
+
 bbb-conf --setip $ctner_ip
 
 #need to find external ip address of server 
 #Need to fix 
 #/etc/bigbluebutton/nginx/sip.nginx
-# proxy_pass http://172.17.0.193:5066;   # replace line...
+# proxy_pass http://172.17.0.193:5066;   # replace line... external maybe
 
 #need to edit and fix  /opt/freeswitch/conf/vars.xml
 #<X-PRE-PROCESS cmd="set" data="local_ip_v4=xxx.yyy.zzz.qqq"/>  #remove it
