@@ -56,19 +56,6 @@ freeswitch.port=5060
 
 ####################
 
-Edit /etc/bigbluebutton/nginx/sip.nginx to
-
-location /ws {
-        proxy_pass http://EXTERNAL_IP_ADDRESS:5066;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "Upgrade";
-        proxy_read_timeout 6h;
-        proxy_send_timeout 6h;
-        client_body_timeout 6h;
-        send_timeout 6h;
-}
-changing EXTERNAL_IP_ADDRESS to your server's elastic IP address.
 #####################
 Open the firewall (if you have on installed) and Security Groups (if your using EC2) the following ports:
 
