@@ -16,20 +16,20 @@ bbb-conf --setip $ctner_intn_ip
 
 
 #need to edit and fix  /opt/freeswitch/conf/vars.xml
-#<X-PRE-PROCESS cmd="set" data="local_ip_v4=xxx.yyy.zzz.qqq"/>  #remove it
-#Change
-#<X-PRE-PROCESS cmd="set" data="bind_server_ip=auto"/>
+<X-PRE-PROCESS cmd="set" data="local_ip_v4=xxx.yyy.zzz.qqq"/>  #remove it
+
+<X-PRE-PROCESS cmd="set" data="bind_server_ip=auto"/>
 #To
-#<X-PRE-PROCESS cmd="set" data="bind_server_ip=EXTERNAL_IP_ADDRESS"/>
+<X-PRE-PROCESS cmd="set" data="bind_server_ip=EXTERNAL_IP_ADDRESS"/>
 ######Change
-#<X-PRE-PROCESS cmd="set" data="external_rtp_ip=stun:stun.freeswitch.org"/>
+<X-PRE-PROCESS cmd="set" data="external_rtp_ip=stun:stun.freeswitch.org"/>
 #To
-#<X-PRE-PROCESS cmd="set" data="external_rtp_ip=EXTERNAL_IP_ADDRESS"/>
+<X-PRE-PROCESS cmd="set" data="external_rtp_ip=EXTERNAL_IP_ADDRESS"/>
 #####
 #Change
-#<X-PRE-PROCESS cmd="set" data="external_sip_ip=stun:stun.freeswitch.org"/>
+<X-PRE-PROCESS cmd="set" data="external_sip_ip=stun:stun.freeswitch.org"/>
 #To
-#<X-PRE-PROCESS cmd="set" data="external_sip_ip=EXTERNAL_IP_ADDRESS"/>
+<X-PRE-PROCESS cmd="set" data="external_sip_ip=EXTERNAL_IP_ADDRESS"/>
 
 
 sed -i 's/.*data="local_ip_v4.*/<X-PRE-PROCESS cmd="set" data=\"local_ip_v4=$ctner_intn_ip\"\/>/' /opt/freeswitch/conf/vars.xml
