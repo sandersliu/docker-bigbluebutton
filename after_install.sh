@@ -8,7 +8,75 @@ dpkg --configure -a
 #take the container real ip to configured the web application 
 # in some areas fail because it keep ip info where the container was build that is not the same 
 #where it will run.... need to find all the wrong conf file and fix it in this area ...
-bbb-conf --setip $(/sbin/ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
+ctner_ip=$(/sbin/ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
+bbb-conf --setip $ctner_ip
+
+#Need to fix 
+#/etc/bigbluebutton/nginx/sip.nginx
+# proxy_pass http://172.17.0.193:5066;   # replace line...
+
+#need to edit and fix  /opt/freeswitch/conf/vars.xml
+#<X-PRE-PROCESS cmd="set" data="local_ip_v4=xxx.yyy.zzz.qqq"/>  #remove it
+#Change
+#<X-PRE-PROCESS cmd="set" data="bind_server_ip=auto"/>
+#To
+#<X-PRE-PROCESS cmd="set" data="bind_server_ip=EXTERNAL_IP_ADDRESS"/>
+######Change
+#<X-PRE-PROCESS cmd="set" data="external_rtp_ip=stun:stun.freeswitch.org"/>
+#To
+#<X-PRE-PROCESS cmd="set" data="external_rtp_ip=EXTERNAL_IP_ADDRESS"/>
+#####
+#Change
+#<X-PRE-PROCESS cmd="set" data="external_sip_ip=stun:stun.freeswitch.org"/>
+#To
+#<X-PRE-PROCESS cmd="set" data="external_sip_ip=EXTERNAL_IP_ADDRESS"/>
+######
+
+Edit /opt/freeswitch/conf/sip_profiles/external.xml and change
+
+    <param name="rtp-ip" value="$${local_ip_v4}"/>
+    <param name="sip-ip" value="$${local_ip_v4}"/>
+    <param name="ext-rtp-ip" value="$${local_ip_v4}"/>
+    <param name="ext-sip-ip" value="$${local_ip_v4}"/>
+to
+
+    <param name="rtp-ip" value="$${local_ip_v4}"/>
+    <param name="sip-ip" value="$${local_ip_v4}"/>
+    <param name="ext-rtp-ip" value="$${external_rtp_ip}"/>
+    <param name="ext-sip-ip" value="$${external_sip_ip}"/>
+    
+##########
+Edit /usr/share/red5/webapps/sip/WEB-INF/bigbluebutton-sip.properties
+
+bbb.sip.app.ip=<internal ip>
+bbb.sip.app.port=5070
+
+freeswitch.ip=<internal ip>
+freeswitch.port=5060
+
+####################
+
+Edit /etc/bigbluebutton/nginx/sip.nginx to
+
+location /ws {
+        proxy_pass http://EXTERNAL_IP_ADDRESS:5066;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+        proxy_read_timeout 6h;
+        proxy_send_timeout 6h;
+        client_body_timeout 6h;
+        send_timeout 6h;
+}
+changing EXTERNAL_IP_ADDRESS to your server's elastic IP address.
+#####################
+Open the firewall (if you have on installed) and Security Groups (if your using EC2) the following ports:
+
+TCP - 5066
+
+UDP - 16384 to 32768
+###################################
+
 
 #to find any error relate to the container configuration for future fix
 bbb-conf --check  >>/var/log/bbb-conf.log 2>&1
