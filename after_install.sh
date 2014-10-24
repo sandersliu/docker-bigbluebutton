@@ -11,6 +11,7 @@ dpkg --configure -a
 ctner_ip=$(/sbin/ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
 bbb-conf --setip $ctner_ip
 
+#need to find external ip address of server 
 #Need to fix 
 #/etc/bigbluebutton/nginx/sip.nginx
 # proxy_pass http://172.17.0.193:5066;   # replace line...
