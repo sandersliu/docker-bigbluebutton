@@ -30,6 +30,10 @@ bbb-conf --setip $ctner_intn_ip
 #<X-PRE-PROCESS cmd="set" data="external_sip_ip=stun:stun.freeswitch.org"/>
 #To
 #<X-PRE-PROCESS cmd="set" data="external_sip_ip=EXTERNAL_IP_ADDRESS"/>
+
+
+sed -i 's/.*data="local_ip_v4.*/<X-PRE-PROCESS cmd="set" data=\"local_ip_v4=$ctner_intn_ip\"\/>/' /opt/freeswitch/conf/vars.xml
+
 ######
 
 Edit /opt/freeswitch/conf/sip_profiles/external.xml and change
