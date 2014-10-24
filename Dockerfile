@@ -58,6 +58,11 @@ COPY backup.sh /sbin/backup
 RUN chmod +x /sbin/backup
 VOLUME /var/backups
 
+#add files and script that need to be use for this container
+#include conf file relate to service/daemon 
+#additionsl tools to be use internally 
+COPY after_install.sh /sbin/after_install
+RUN chmod +x /sbin/after_install
 
 #add files and script that need to be use for this container
 #include conf file relate to service/daemon 
