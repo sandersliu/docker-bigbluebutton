@@ -61,7 +61,7 @@ freeswitch.port=5060
 /var/lib/tomcat7/webapps/demo/bbb_api_conf.jsp
 String BigBlueButtonURL = "http://199.59.90.34:49166/bigbluebutton/";  external ip:port 
 #####################
-/etc/nginx/sites-available/bigbluebutton   it need to know what ip to use and port
+/etc/nginx/sites-available/bigbluebutton   internal port ....
 #####################
 Open the firewall (if you have on installed) and Security Groups (if your using EC2) the following ports:
 
