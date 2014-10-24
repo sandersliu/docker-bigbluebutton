@@ -10,6 +10,9 @@ if [ -f /etc/configured ]; then
         echo 'already configured'
 else
         #code that need to run only one time ....
+        #to finish install that fail when container image was created 
+        #container build image try to create the configuration but it is the wrong enviroment ... 
+        # but after it is create or run the first time is the best for it to finish it
         dpkg --configure -a
         
         #run the script to change ip
