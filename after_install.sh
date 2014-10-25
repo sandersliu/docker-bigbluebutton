@@ -14,7 +14,7 @@ bbb-conf --setip $ctner_intn_ip
 # proxy_pass http://172.17.0.193:5066;   # replace line... external maybe
 
 #need to edit and fix  /opt/freeswitch/conf/vars.xml
-sed -i 's/.*data="local_ip_v4.*/<X-PRE-PROCESS cmd="set" data="local_ip_v4=$ctner_intn_ip"\/>/' /opt/freeswitch/conf/vars.xml
+sed -i 's/.*data="local_ip_v4.*/ /' /opt/freeswitch/conf/vars.xml
 sed -i 's/.*data="bind_server_ip.*/<X-PRE-PROCESS cmd="set" data="bind_server_ip=$ctner_extn_ip"\/>/' /opt/freeswitch/conf/vars.xml
 sed -i 's/.*data="external_rtp_ip.*/<X-PRE-PROCESS cmd="set" data="external_rtp_ip=$ctner_extn_ip"\/>/' /opt/freeswitch/conf/vars.xml
 sed -i 's/.*data="external_sip_ip.*/<X-PRE-PROCESS cmd="set" data="external_sip_ip=$ctner_extn_ip"\/>/' /opt/freeswitch/conf/vars.xml
