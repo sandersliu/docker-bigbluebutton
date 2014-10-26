@@ -14,11 +14,12 @@ else
         #container build image try to create the configuration but it is the wrong enviroment ... 
         # but after it is create or run the first time is the best for it to finish it
         source /root/.bashrc
+        #this fail under this eviurement but work fine under bash
         #dpkg --configure -a
         
         #run the script to change ip
         #/sbin/after_install
-        
+
         #to find any error relate to the container configuration for future fix
         #bbb-conf --check  >>/var/log/bbb-conf.log 2>&1
         
