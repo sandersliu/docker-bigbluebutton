@@ -13,25 +13,17 @@ bbb-conf --setip $ctner_intn_ip
 #/etc/bigbluebutton/nginx/sip.nginx
 # proxy_pass http://172.17.0.193:5066;   # replace line... external maybe
 
-#need to edit and fix  /opt/freeswitch/conf/vars.xml
+#to change conf /opt/freeswitch/conf/vars.xml
 sed -i 's/.*data="local_ip_v4.*/ /' /opt/freeswitch/conf/vars.xml
-sed -i 's/.*data="bind_server_ip.*/<X-PRE-PROCESS cmd="set" data="bind_server_ip=$ctner_extn_ip"\/>/' /opt/freeswitch/conf/vars.xml
-sed -i 's/.*data="external_rtp_ip.*/<X-PRE-PROCESS cmd="set" data="external_rtp_ip=$ctner_extn_ip"\/>/' /opt/freeswitch/conf/vars.xml
-sed -i 's/.*data="external_sip_ip.*/<X-PRE-PROCESS cmd="set" data="external_sip_ip=$ctner_extn_ip"\/>/' /opt/freeswitch/conf/vars.xml
+sed -i 's/.*data="bind_server_ip.*/<X-PRE-PROCESS cmd="set" data="bind_server_ip='$ctner_extn_ip'"\/>/' /opt/freeswitch/conf/vars.xml
+sed -i 's/.*data="external_rtp_ip.*/<X-PRE-PROCESS cmd="set" data="external_rtp_ip='$ctner_extn_ip'"\/>/' /opt/freeswitch/conf/vars.xml
+sed -i 's/.*data="external_sip_ip.*/<X-PRE-PROCESS cmd="set" data="external_sip_ip='$ctner_extn_ip'"\/>/' /opt/freeswitch/conf/vars.xml
+#to change conf /opt/freeswitch/conf/sip_profiles/external.xml
+sed -i 's/.*name="rtp-ip" value.*/<param name="rtp-ip" value="'$ctner_intn_ip'"/>/' /opt/freeswitch/conf/sip_profiles/external.xml
+sed -i 's/.*name="sip-ip" value.*/<param name="sip-ip" value="'$ctner_intn_ip'"/>/' /opt/freeswitch/conf/sip_profiles/external.xml
+sed -i 's/.*name="ext-rtp-ip" value.*/<param name="ext-rtp-ip" value="'$ctner_extn_ip'"/>/' /opt/freeswitch/conf/sip_profiles/external.xml
+sed -i 's/.*name="ext-sip-ip" value.*/<param name="ext-sip-ip" value="'$ctner_extn_ip'"/>/' /opt/freeswitch/conf/sip_profiles/external.xml
 
-Edit /opt/freeswitch/conf/sip_profiles/external.xml and change
-
-    <param name="rtp-ip" value="$${local_ip_v4}"/>
-    <param name="sip-ip" value="$${local_ip_v4}"/>
-    <param name="ext-rtp-ip" value="$${local_ip_v4}"/>
-    <param name="ext-sip-ip" value="$${local_ip_v4}"/>
-to
-
-    <param name="rtp-ip" value="$${local_ip_v4}"/>
-    <param name="sip-ip" value="$${local_ip_v4}"/>
-    <param name="ext-rtp-ip" value="$${external_rtp_ip}"/>
-    <param name="ext-sip-ip" value="$${external_sip_ip}"/>
-    
 ##########
 Edit /usr/share/red5/webapps/sip/WEB-INF/bigbluebutton-sip.properties
 
