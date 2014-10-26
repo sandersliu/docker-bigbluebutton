@@ -14,16 +14,16 @@ else
         #container build image try to create the configuration but it is the wrong enviroment ... 
         # but after it is create or run the first time is the best for it to finish it
         source /root/.bashrc
-        dpkg --configure -a
+        #dpkg --configure -a
         
         #run the script to change ip
-        /sbin/after_install
+        #/sbin/after_install
         
         #to find any error relate to the container configuration for future fix
-        bbb-conf --check  >>/var/log/bbb-conf.log 2>&1
+        #bbb-conf --check  >>/var/log/bbb-conf.log 2>&1
         
         #start it with all the service ... maybe is no the right place to do it but at runit script ..
-        bbb-conf --start &
+        #bbb-conf --start &
         
         #needed for fix problem with ubuntu and cron
         update-locale 
