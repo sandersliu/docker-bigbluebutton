@@ -15,15 +15,16 @@ else
         # but after it is create or run the first time is the best for it to finish it
         source /root/.bashrc
         #this fail under this eviurement but work fine under bash
-        dpkg --configure -a 
-        apt-get install bbb-demo
+        
+        #dpkg --configure -a 
+        #apt-get install bbb-demo
        
         
         #run the script to change ip
-        /sbin/after_install
+        #/sbin/after_install
 
         #to find any error relate to the container configuration for future fix
-        bbb-conf --check  >>/var/log/bbb-conf.log 2>&1
+        #bbb-conf --check  >>/var/log/bbb-conf.log 2>&1
         
         #needed for fix problem with ubuntu and cron
         update-locale 
