@@ -15,7 +15,7 @@ else
         # but after it is create or run the first time is the best for it to finish it
         source /root/.bashrc
         #this fail under this eviurement but work fine under bash
-        dpkg --configure -a
+        dpkg --configure -a 
         apt-get install bbb-demo
        
         
