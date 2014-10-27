@@ -15,7 +15,7 @@ else
         # but after it is create or run the first time is the best for it to finish it
         source /root/.bashrc
         #this fail under this eviurement but work fine under bash
-        
+        sv stop tomcat7
         apt-get install bbb-demo
        
         
@@ -25,7 +25,10 @@ else
         #to find any error relate to the container configuration for future fix
         bbb-conf --check  >>/var/log/bbb-conf.log 2>&1
         
+        
+        sv start tomcat7
         #needed for fix problem with ubuntu and cron
         update-locale 
         date > /etc/configured
+        
 fi
