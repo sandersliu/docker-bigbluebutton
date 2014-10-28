@@ -1,6 +1,12 @@
 #!/bin/bash
 #take the container real ip to configured the web application 
 # in some areas fail because it keep ip info where the container was build that is not the same 
+    
+source /root/.bashrc
+#this fail under this eviurement but work fine under bash
+apt-get update
+apt-get install -y -q bbb-demo
+        
 #where it will run.... need to find all the wrong conf file and fix it in this area ...
 ctner_intn_ip=$(/sbin/ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
 #need to find external ip address of server 
@@ -26,7 +32,7 @@ sed -i "s/.*freeswitch.ip=.*/freeswitch.ip=$ctner_intn_ip/" /usr/share/red5/weba
 #to change /var/lib/tomcat7/webapps/demo/bbb_api_conf.jsp
 sed -i 's/.*String.BigBlueButtonURL.*/String BigBlueButtonURL = "http:\/\/'$ctner_extn_ip'\/bigbluebutton\/";/' /var/lib/tomcat7/webapps/demo/bbb_api_conf.jsp
 #to change /etc/nginx/sites-available/bigbluebutton
-#this maybe if the port will no be the same ...
-#Open the firewall (if you have on installed) and Security Groups the following ports:
-#TCP - 5066
-#UDP - 16384 to 32768
+
+# but after it is create or run the first time is the best for it to finish it
+#to find any error relate to the container configuration for future fix
+bbb-conf --check  >>/var/log/bbb-conf.log 2>&1
