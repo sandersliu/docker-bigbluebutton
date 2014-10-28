@@ -32,7 +32,7 @@ sed -i "s/.*freeswitch.ip=.*/freeswitch.ip=$ctner_intn_ip/" /usr/share/red5/weba
 #to change /var/lib/tomcat7/webapps/demo/bbb_api_conf.jsp
 sed -i 's/.*String.BigBlueButtonURL.*/String BigBlueButtonURL = "http:\/\/'$ctner_extn_ip'\/bigbluebutton\/";/' /var/lib/tomcat7/webapps/demo/bbb_api_conf.jsp
 #to change /etc/nginx/sites-available/bigbluebutton
-
+bbb-conf --restart
 # but after it is create or run the first time is the best for it to finish it
 #to find any error relate to the container configuration for future fix
 bbb-conf --check  >>/var/log/bbb-conf.log 2>&1
