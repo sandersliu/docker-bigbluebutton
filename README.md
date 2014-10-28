@@ -5,7 +5,9 @@ container running bigbluebutton
 
  docker run -d -p 80:80 -p 9123:9123 -p 1935:1935 -p 5066:5066 angelrr7702/docker-bigbluebutton
 
+Them you need to run this command to finish installing :
 
-after manual configuration of ip ... it still fail ,,,problem with internal ip and external ip configuration ...
+docker exec -it container_id /sbin/after_install
 
-the problem is relate that container ... have a internal ip and external ip from the server ...
+This will finish installation final conf and change ip conf for the container ...
+
